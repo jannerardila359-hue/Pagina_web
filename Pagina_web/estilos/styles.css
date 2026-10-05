@@ -1,0 +1,1583 @@
+/* =====================================================================
+   INGENIERÍA DE SISTEMAS · UNIVERSIDAD DE LA AMAZONIA
+   Hoja de estilos organizada · Enfoque MOBILE-FIRST
+
+   ÍNDICE
+   0.  Variables (colores)
+   1.  Reset y base
+   2.  Header
+   3.  Banner (carrusel + tarjeta)
+   4.  Nav (subnavegación, pegada arriba en celular)
+   5.  Main · estilos comunes de las secciones
+   6.  Descripción del programa
+   7.  Información clave
+   8.  Perfil del egresado
+   9.  Inversión (tarjetas que se voltean)
+   10. Documentos de interés
+   11. Contacto
+   12. Footer
+   13. Tablet      (≥ 768px)
+   14. Computador  (≥ 1024px)
+   15. Accesibilidad (menos movimiento)
+   ===================================================================== */
+
+
+/* =====================================================================
+   0. VARIABLES · los colores se cambian en un solo lugar
+   ===================================================================== */
+:root {
+    --verde: #1e7a1e;          /* verde institucional */
+    --verde-oscuro: #145214;   /* hover de botones verdes */
+    --verde-claro: #e8f3e8;    /* fondos suaves de íconos */
+    --negro: #1f1f1c;          /* header, nav, contacto */
+    --gris-fondo: #f5f5f3;     /* secciones y cajas grises */
+    --gris-linea: #3a3a37;     /* líneas sobre fondo oscuro */
+    --blanco: #fff;
+}
+
+
+/* =====================================================================
+   1. RESET Y BASE
+   ===================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;            /* bajada suave con los enlaces del nav */
+}
+
+/* El body organiza la página en 5 áreas con GRID */
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-template-areas:
+        "header"
+        "banner"
+        "nav"
+        "main"
+        "footer";
+}
+
+/* Caja centrada que se reutiliza en toda la página */
+.contenedor {
+    max-width: 1100px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+/* Al bajar con un ancla, el título no queda tapado por el nav pegado */
+section[id] {
+    scroll-margin-top: 90px;
+}
+
+
+/* =====================================================================
+   2. HEADER
+   ===================================================================== */
+header {
+    grid-area: header;
+    background: var(--negro);
+    padding-block: 0.6rem;
+    border-bottom: 1px solid var(--gris-linea);
+}
+
+.encabezado-interno {
+    display: flex;
+    align-items: center;
+    min-height: 110px;
+}
+
+.encabezado-logo {
+    display: inline-flex;
+    transition: opacity 0.3s ease;
+}
+
+.encabezado-logo:hover {
+    opacity: 0.8;
+}
+
+.encabezado-img {
+    display: block;
+    height: 60px;
+    width: auto;
+}
+
+
+/* =====================================================================
+   3. BANNER · carrusel de fotos + tarjeta encima
+   ===================================================================== */
+.banner {
+    grid-area: banner;
+    position: relative;                 /* referencia para lo que se posiciona adentro */
+    background: var(--negro);
+}
+
+.banner-foto img {
+    display: block;
+    width: 100%;
+    height: 320px;
+    object-fit: cover;                  /* llena el espacio sin deformar la foto */
+    object-position: center top;
+}
+
+/* En celular la tarjeta sube 80px y se monta sobre la foto */
+.banner-contenido {
+    position: relative;
+    z-index: 2;                         /* queda ENCIMA del carrusel */
+    margin-top: -80px;
+    padding-bottom: 1.5rem;
+}
+
+.banner-tarjeta {
+    background: linear-gradient(135deg, rgba(60, 60, 58, 0.95), rgba(30, 30, 28, 0.95));
+    color: var(--blanco);
+    padding: 1.5rem;
+}
+
+.banner-cabecera {
+    display: flex;
+    justify-content: space-between;     /* Pregrado ←→ Presencial */
+    align-items: center;
+}
+
+.banner-nivel,
+.banner-datos,
+.banner-facultad {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #ccc;
+    font-size: 0.8rem;
+}
+
+.banner-modalidad {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;               /* forma de píldora */
+    padding: 0.4rem 1rem;
+}
+
+.banner-titulo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-block: 1.5rem 1.25rem;
+}
+
+.banner-datos {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.banner-facultad {
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+}
+
+
+/* =====================================================================
+   4. NAV · subnavegación (en celular se queda pegada arriba)
+   ===================================================================== */
+.subnav {
+    grid-area: nav;
+    background: var(--negro);
+    color: var(--blanco);
+    padding-block: 1rem;
+    position: sticky;                   /* se "pega"… */
+    top: 0;                             /* …en el borde de arriba */
+    z-index: 100;                       /* encima del contenido que pasa por debajo */
+}
+
+/* Si el menú abierto no cabe en la pantalla, se desplaza por dentro */
+.subnav-menu {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Botón "Ver todo" (solo celular) */
+.subnav-toggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    border-left: 2px solid var(--blanco);
+    color: var(--blanco);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Cambio de texto Ver todo / Ocultar todo (sin JavaScript) */
+.texto-cerrar {
+    display: none;
+}
+
+.subnav-toggle[aria-expanded="true"] .texto-abrir {
+    display: none;
+}
+
+.subnav-toggle[aria-expanded="true"] .texto-cerrar {
+    display: inline;
+}
+
+.subnav-flecha {
+    transition: transform 0.3s ease;
+}
+
+.subnav-toggle[aria-expanded="true"] .subnav-flecha {
+    transform: rotate(180deg);
+}
+
+/* Enlaces */
+.subnav-lista {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    flex-direction: column;             /* celular: uno debajo del otro */
+    gap: 1rem;
+}
+
+.subnav-enlace {
+    color: var(--blanco);
+    text-decoration: none;
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid #5a5a57;
+    transition: border-color 0.3s ease;
+}
+
+.subnav-enlace:hover {
+    color: var(--blanco);
+    border-color: var(--blanco);
+}
+
+/* Botones */
+.subnav-acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.subnav-boton {
+    display: block;
+    text-align: center;
+    padding: 0.8rem 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--blanco);    /* mismo borde en los dos: miden igual */
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.subnav-boton-principal {
+    background: var(--blanco);
+    color: var(--negro);
+}
+
+.subnav-boton-principal:hover {
+    background: #ddd;
+    color: var(--negro);
+}
+
+.subnav-boton-secundario {
+    background: var(--negro);
+    color: var(--blanco);
+}
+
+.subnav-boton-secundario:hover {
+    background: var(--blanco);
+    color: var(--negro);
+}
+
+
+/* =====================================================================
+   5. MAIN · estilos comunes de todas las secciones
+   ===================================================================== */
+main {
+    grid-area: main;
+}
+
+.seccion {
+    padding-block: 3rem;
+    background: var(--blanco);
+}
+
+.seccion-gris {
+    background: var(--gris-fondo);
+}
+
+.seccion-titulo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--negro);
+    margin: 0 0 1.5rem;
+    padding-left: 0.75rem;
+    border-left: 4px solid var(--verde);  /* rayita verde a la izquierda */
+}
+
+.subtitulo {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 1.25rem;
+}
+
+/* Animación de aparición (se usa en "Leer el propósito completo") */
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* =====================================================================
+   6. DESCRIPCIÓN DEL PROGRAMA
+   ===================================================================== */
+.cita {
+    margin: 0 0 2rem;
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    border-left: 3px solid #ccc;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+.pilares-intro {
+    font-weight: 600;
+    color: var(--negro);
+    margin-bottom: 1rem;
+}
+
+/* Las 6 áreas con GRID */
+.pilares {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* celular: 2 columnas */
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+}
+
+.pilar {
+    display: flex;
+    flex-direction: column;             /* ícono arriba, texto abajo */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+    background: var(--gris-fondo);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--negro);
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.pilar i {
+    font-size: 2rem;
+    color: var(--verde);
+    transition: color 0.3s ease;
+}
+
+.pilar:hover {
+    background: var(--verde);
+    color: var(--blanco);
+    transform: translateY(-3px);
+}
+
+.pilar:hover i {
+    color: var(--blanco);
+}
+
+/* Botón "Leer el propósito completo" (píldora) */
+.leer-mas {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.25rem;
+    margin-bottom: 1.25rem;
+    background: transparent;
+    border: 2px solid var(--verde);
+    border-radius: 999px;
+    color: var(--verde);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.leer-mas:hover {
+    background: var(--verde);
+    color: var(--blanco);
+    box-shadow: 0 4px 12px rgba(30, 122, 30, 0.3);
+}
+
+.leer-mas:focus-visible {
+    outline: 3px solid rgba(30, 122, 30, 0.4);
+    outline-offset: 3px;
+}
+
+.leer-mas-flecha {
+    transition: transform 0.3s ease;
+}
+
+.leer-mas:hover .leer-mas-flecha {
+    transform: translateY(2px);
+}
+
+.leer-mas[aria-expanded="true"] {
+    background: var(--verde);
+    color: var(--blanco);
+}
+
+.leer-mas[aria-expanded="true"] .leer-mas-flecha {
+    transform: rotate(180deg);
+}
+
+.leer-mas[aria-expanded="true"] .texto-abrir  { display: none; }
+.leer-mas[aria-expanded="true"] .texto-cerrar { display: inline; }
+
+/* Texto completo del propósito */
+.descripcion-texto {
+    background: var(--gris-fondo);
+    border-left: 4px solid var(--verde);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    animation: aparecer 0.5s ease;
+}
+
+.descripcion-texto p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 1rem;
+}
+
+.descripcion-texto p:last-child {
+    margin-bottom: 0;                   /* el último párrafo no deja hueco abajo */
+}
+
+.descripcion-texto strong {
+    color: var(--verde);
+    font-weight: 700;
+}
+
+
+/* =====================================================================
+   7. INFORMACIÓN CLAVE
+   ===================================================================== */
+.info-clave {
+    border-top: 2px solid #bbbcbb;
+    border-bottom: 2px solid #bbbcbb;
+    margin-top: 2.5rem;
+    padding-block: 2rem;                /* solo arriba/abajo: a los lados manda .contenedor */
+}
+
+/* Los 4 datos con GRID */
+.clave {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem 1rem;
+    margin: 0 0 2rem;
+}
+
+.clave-item dt {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 0.4rem;
+}
+
+.clave-item dt i {
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--verde-claro);
+    color: var(--verde);
+    font-size: 1.2rem;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.clave-item:hover dt i {
+    background: var(--verde);
+    color: var(--blanco);
+    transform: translateY(-8px) scale(1.1);
+}
+
+.clave-item dd {
+    margin: 0 0 0 calc(34px + 0.6rem);  /* alinea el valor con el texto, no con el ícono */
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--negro);
+}
+
+.clave-item dd a {
+    color: var(--verde);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+}
+
+/* Los 4 cuadros con FLEX-WRAP */
+.legal {
+    display: flex;
+    flex-wrap: wrap;                    /* los que no caben bajan a la siguiente fila */
+    gap: 1rem;
+}
+
+.legal-caja {
+    flex: 1 1 220px;                    /* crece | se encoge | mide ~220px */
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.25rem;
+    background: var(--gris-fondo);
+    border-top: 3px solid var(--verde);
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.legal-caja:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.legal-icono {
+    font-size: 1.5rem;
+    color: var(--verde);
+}
+
+.legal-caja h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--negro);
+}
+
+.legal-caja p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #555;
+}
+
+.legal-caja .legal-nota {
+    font-size: 0.8rem;
+    color: #767676;
+}
+
+/* Botón de documento (píldora) */
+.clave-descarga {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.75rem;
+    border: 1px solid var(--verde);
+    border-radius: 999px;
+    color: var(--verde);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.clave-descarga:hover {
+    background: var(--verde);
+    color: var(--blanco);
+}
+
+/* Los botones siempre ABAJO del cuadro */
+.legal-caja > .clave-descarga,
+.legal-botones {
+    margin-top: auto;
+}
+
+.legal-caja > .clave-descarga {
+    align-self: flex-start;             /* no se estira a todo el ancho */
+}
+
+.legal-botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+}
+
+
+/* =====================================================================
+   8. PERFIL DEL EGRESADO · recorrido de 3 pasos
+   ===================================================================== */
+.perfil-frase {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.35rem;
+    line-height: 1.45;
+    color: var(--negro);
+    max-width: 40ch;
+    margin-bottom: 2.5rem;
+}
+
+.recorrido {
+    position: relative;                 /* referencia para la línea */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Celular: línea VERTICAL que pasa por el centro de los círculos */
+.recorrido::before {
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    left: 27px;
+    width: 2px;
+    background: linear-gradient(var(--verde), #b9dbb9);
+}
+
+.paso {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+}
+
+.paso-numero {
+    position: relative;
+    z-index: 1;                         /* queda ENCIMA de la línea */
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--blanco);
+    border: 2px solid var(--verde);
+    color: var(--verde);
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.paso:hover .paso-numero {
+    background: var(--verde);
+    color: var(--blanco);
+    transform: scale(1.1) translateY(-4px);
+}
+
+.paso-texto {
+    color: #555;
+    line-height: 1.5;
+}
+
+.paso-texto h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0.8rem 0 0.5rem;
+    color: var(--negro);
+}
+
+.paso-texto strong {
+    color: var(--verde);
+}
+
+
+/* =====================================================================
+   9. INVERSIÓN · tarjetas que se voltean (3D)
+   ===================================================================== */
+.volteo-pista {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.volteos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* El "escenario": da profundidad 3D */
+.volteo {
+    perspective: 1000px;
+    height: 290px;
+    cursor: pointer;                    /* además, en celular permite el :hover al tocar */
+}
+
+/* La tarjeta que gira */
+.volteo-interno {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s ease;
+}
+
+.volteo:hover .volteo-interno,
+.volteo:focus-within .volteo-interno {
+    transform: rotateY(180deg);
+}
+
+/* Las dos caras, una encima de la otra */
+.volteo-cara {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;        /* esconde la cara que queda de espaldas */
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Cara de adelante */
+.volteo-frente {
+    background: var(--verde);
+    color: var(--blanco);
+    align-items: flex-start;
+}
+
+.volteo-frente-oscuro {
+    background: var(--negro);
+}
+
+.volteo-icono {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+}
+
+.volteo-etiqueta {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.85;
+}
+
+.volteo-valor {
+    margin: 0;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.volteo-valor-texto {
+    font-size: 1.9rem;
+    margin-block: 0.4rem;
+}
+
+.volteo-sub {
+    margin: 0;
+    opacity: 0.85;
+}
+
+.volteo-girar {
+    margin-top: auto;
+    align-self: flex-end;
+    font-size: 0.8rem;
+    font-weight: 700;
+    opacity: 0.8;
+}
+
+/* Cara de atrás (empieza girada 180°) */
+.volteo-atras {
+    transform: rotateY(180deg);
+    background: var(--blanco);
+    border: 2px solid var(--verde);
+    color: #333;
+    gap: 0.75rem;
+}
+
+.volteo-atras h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--verde);
+}
+
+.volteo-atras p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.volteo-boton {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--verde);
+    color: var(--blanco);
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.volteo-boton:hover {
+    background: var(--verde-oscuro);
+    color: var(--blanco);
+}
+
+
+/* =====================================================================
+   10. DOCUMENTOS DE INTERÉS · barra verde con + / −
+   ===================================================================== */
+.docs-interes {
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    overflow: hidden;                   /* las esquinas redondas recortan la barra */
+}
+
+.docs-encabezado {
+    margin: 0;
+}
+
+.docs-boton {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;     /* texto a la izquierda, signo a la derecha */
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 1.25rem;
+    background: var(--verde);
+    color: var(--blanco);
+    border: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.docs-boton:hover {
+    background: #186418;
+}
+
+.docs-boton:focus-visible {
+    outline: 3px solid rgba(30, 122, 30, 0.45);
+    outline-offset: 2px;
+}
+
+/* El signo + / − dibujado con POSITION */
+.docs-signo {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.docs-signo::before,
+.docs-signo::after {
+    content: "";
+    position: absolute;
+    background: var(--blanco);
+    border-radius: 2px;
+    transition: transform 0.3s ease;
+}
+
+.docs-signo::before {                   /* raya horizontal (siempre se ve) */
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    transform: translateY(-50%);
+}
+
+.docs-signo::after {                    /* raya vertical (la que desaparece) */
+    left: 50%;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    transform: translateX(-50%);
+}
+
+/* Abierto: la raya vertical se aplasta → queda "−" */
+.docs-boton:not(.collapsed) .docs-signo::after {
+    transform: translateX(-50%) scaleY(0);
+}
+
+.docs-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0.75rem 0;
+    background: var(--blanco);
+}
+
+.docs-lista a {
+    display: flex;                      /* ícono | texto | flecha */
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1.25rem;
+    color: var(--verde);
+    text-decoration: none;
+    transition: background 0.25s ease, padding-left 0.25s ease;
+}
+
+.docs-lista a:hover {
+    background: #f1f7f1;
+    padding-left: 1.6rem;
+}
+
+.docs-tipo {
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.docs-pdf   { color: #b3261e; }         /* rojo: PDF */
+.docs-drive { color: #c08a00; }         /* amarillo: carpeta de Drive */
+
+.docs-flecha {
+    margin-left: auto;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.docs-lista a:hover .docs-flecha {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* =====================================================================
+   11. CONTACTO · banda oscura
+   ===================================================================== */
+.contacto-banda {
+    background: var(--negro);
+    color: var(--blanco);
+    padding-block: 3.5rem;
+}
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+}
+
+.contacto-antetitulo {
+    margin: 0 0 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #7fc47f;                     /* verde claro: se lee bien sobre negro */
+}
+
+.contacto-titulo {
+    margin: 0 0 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.contacto-texto {
+    margin: 0 0 2rem;
+    color: #c9c9c5;
+    max-width: 42ch;
+}
+
+.coordinadora {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.coordinadora-iniciales {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--verde);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+}
+
+.coordinadora-nombre {
+    margin: 0;
+    font-weight: 700;
+}
+
+.coordinadora-cargo {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #a9a9a5;
+}
+
+.contacto-acciones {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--gris-linea);
+}
+
+.contacto-acciones li {
+    border-bottom: 1px solid var(--gris-linea);
+}
+
+.accion {
+    display: flex;                      /* ícono | texto | flecha */
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 0.25rem;
+    color: var(--blanco);
+    text-decoration: none;
+    transition: padding-left 0.3s ease, color 0.3s ease;
+}
+
+.accion:hover,
+.accion:focus-visible {
+    color: var(--blanco);
+}
+
+.accion-icono {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid #5a5a57;
+    font-size: 1.1rem;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.accion:hover .accion-icono {
+    background: var(--verde);
+    border-color: var(--verde);
+}
+
+.accion-texto {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    font-size: 0.95rem;
+    overflow-wrap: anywhere;            /* el correo largo no se sale en el celular */
+}
+
+.accion-texto small {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #a9a9a5;
+}
+
+.accion-flecha {
+    font-size: 1.2rem;
+    color: #7fc47f;
+    transition: transform 0.3s ease;
+}
+
+.accion:hover .accion-flecha {
+    transform: translateX(5px);
+}
+
+
+/* =====================================================================
+   12. FOOTER
+   ===================================================================== */
+.pie {
+    grid-area: footer;
+    background: #0f3d10;                /* verde muy oscuro */
+    color: #d7e6d7;
+    font-size: 0.92rem;
+}
+
+.pie a {
+    color: inherit;
+}
+
+/* Las 4 columnas con GRID */
+.pie-grid {
+    display: grid;
+    grid-template-columns: 1fr;         /* celular: una debajo de otra */
+    gap: 2.5rem;
+    padding-block: 3.5rem;
+}
+
+/* Columna 1: marca */
+.pie-logo {
+    display: block;
+    height: 70px;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+.pie-nit {
+    margin: 0 0 0.75rem;
+    font-weight: 700;
+    color: var(--blanco);
+}
+
+.pie-lema {
+    margin: 0 0 1.5rem;
+    max-width: 32ch;
+    line-height: 1.6;
+}
+
+.pie-redes {
+    display: flex;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem;
+}
+
+.pie-redes a {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: var(--blanco);
+    font-size: 1rem;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.pie-redes a:hover,
+.pie-redes a:focus-visible {
+    background: var(--blanco);
+    color: #0f3d10;
+    transform: translateY(-3px);
+}
+
+.pie-usuario {
+    margin: 0;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--blanco);
+}
+
+/* Títulos de las columnas */
+.pie-titulo {
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--blanco);
+    border-bottom: 2px solid #3f8f3f;
+}
+
+/* Columna 2: enlaces con subrayado animado */
+.pie-enlaces {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.pie-enlaces a {
+    position: relative;                 /* referencia para la línea */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.pie-enlaces a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    background: var(--blanco);
+    transform: scaleX(0);               /* empieza sin ancho */
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.pie-enlaces a:hover {
+    color: var(--blanco);
+}
+
+.pie-enlaces a:hover::after {
+    transform: scaleX(1);               /* crece de izquierda a derecha */
+}
+
+/* Columna 3: datos con ícono */
+.pie-datos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pie-datos li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.pie-datos i {
+    color: #8fd18f;
+    font-size: 1.05rem;
+    margin-top: 0.1rem;
+}
+
+.pie-datos small {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9fbf9f;
+}
+
+.pie-datos a {
+    overflow-wrap: anywhere;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.pie-datos a:hover {
+    color: var(--blanco);
+    border-color: var(--blanco);
+}
+
+/* Columna 4: mapa */
+.pie-mapa {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #3f8f3f;
+    height: 220px;
+}
+
+.pie-mapa iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Franja inferior */
+.pie-franja {
+    background: #0a2b0b;
+    font-size: 0.8rem;
+}
+
+.pie-franja-interna {
+    display: flex;
+    flex-direction: column;             /* celular: apilado y centrado */
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    padding-block: 1.25rem;
+}
+
+.pie-franja-interna p {
+    margin: 0;
+}
+
+.pie-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pie-logos img {
+    display: block;
+    height: 60px;
+    width: auto;
+}
+
+.pie-arriba {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.pie-arriba i {
+    transition: transform 0.3s ease;
+}
+
+.pie-arriba:hover i {
+    transform: translateY(-4px);        /* la flecha "salta" hacia arriba */
+}
+
+
+/* =====================================================================
+   13. TABLET (≥ 768px)
+   ===================================================================== */
+@media (min-width: 768px) {
+
+    /* Header */
+    .encabezado-img {
+        height: 70px;
+    }
+
+    /* Banner */
+    .banner {
+        min-height: 500px;
+    }
+
+    .banner-contenido {
+        padding-inline: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
+    .banner-tarjeta {
+        max-width: 600px;
+        padding: 2rem 1.5rem;
+    }
+
+    /* Nav: deja de estar pegado y el menú queda siempre abierto */
+    .subnav {
+        position: static;
+        padding-block: 1.75rem;
+    }
+
+    section[id] {
+        scroll-margin-top: 0;
+    }
+
+    .subnav-toggle {
+        display: none;
+    }
+
+    .subnav-menu {
+        max-height: none;
+        overflow: visible;
+    }
+
+    .subnav-menu.collapse {
+        display: flex;                  /* le gana al collapse de Bootstrap */
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+    }
+
+    .subnav-lista {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.75rem;
+        margin: 0;
+    }
+
+    .subnav-acciones {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        margin: 0;
+    }
+
+    /* Descripción */
+    .pilares {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .descripcion-texto {
+        max-width: 75ch;
+    }
+
+    /* Perfil: los 3 pasos en fila con línea horizontal */
+    .perfil-frase {
+        font-size: 1.6rem;
+    }
+
+    .recorrido {
+        flex-direction: row;
+        gap: 2.5rem;
+    }
+
+    .recorrido::before {
+        display: none;                  /* se quita la línea vertical… */
+    }
+
+    .paso:not(:last-child)::after {     /* …y cada paso dibuja su tramo */
+        content: "";
+        position: absolute;
+        top: 27px;
+        left: 64px;
+        right: calc(-2.5rem + 8px);
+        height: 2px;
+        background: linear-gradient(90deg, var(--verde), #b9dbb9);
+    }
+
+    .paso {
+        flex: 1;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    /* Inversión: tarjetas lado a lado */
+    .volteos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Footer: 2 columnas */
+    .pie-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =====================================================================
+   14. COMPUTADOR (≥ 1024px)
+   ===================================================================== */
+@media (min-width: 1024px) {
+
+    /* Header */
+    header {
+        border-bottom: none;
+    }
+
+    .encabezado-interno {
+        min-height: 120px;
+    }
+
+    .encabezado-img {
+        height: 80px;
+    }
+
+    /* Banner: el carrusel se vuelve FONDO y la tarjeta queda encima */
+    .banner {
+        min-height: 500px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .banner-carrusel {
+        position: absolute;
+        inset: 0;
+    }
+
+    .banner-carrusel .carousel-inner,
+    .banner-carrusel .carousel-item,
+    .banner-foto,
+    .banner-foto img {
+        height: 100%;
+    }
+
+    .banner-foto img {
+        object-position: center;
+    }
+
+    .banner-contenido {
+        margin-top: 0;
+        padding-bottom: 0;
+        width: 100%;
+    }
+
+    .banner-tarjeta {
+        max-width: 660px;
+        padding: 2.5rem 1.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .banner-titulo {
+        font-size: 2rem;
+    }
+
+    /* Secciones */
+    .seccion {
+        padding-block: 4.5rem;
+    }
+
+    .seccion-titulo {
+        font-size: 2rem;
+    }
+
+    /* Descripción e información clave */
+    .pilares {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .clave {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Contacto: 2 columnas */
+    .contacto-banda {
+        padding-block: 5rem;
+    }
+
+    .contacto-grid {
+        grid-template-columns: 1fr 1.2fr;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    .contacto-titulo {
+        font-size: 2.3rem;
+    }
+
+    .accion-texto {
+        font-size: 1.05rem;
+    }
+
+    .accion:hover,
+    .accion:focus-visible {
+        padding-left: 0.9rem;           /* solo en computador la fila se corre */
+    }
+
+    /* Footer: 4 columnas y franja en fila */
+    .pie-grid {
+        grid-template-columns: 1.1fr 1fr 1.4fr 1.3fr;
+        padding-block: 4.5rem;
+    }
+
+    .pie-franja-interna {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+}
+
+
+/* =====================================================================
+   15. ACCESIBILIDAD · menos movimiento para quien lo pidió en su sistema
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
