@@ -1,44 +1,15 @@
-/* =====================================================================
-   INGENIERÍA DE SISTEMAS · UNIVERSIDAD DE LA AMAZONIA
-   Hoja de estilos organizada · Enfoque MOBILE-FIRST
 
-   ÍNDICE
-   0.  Variables (colores)
-   1.  Reset y base
-   2.  Header
-   3.  Banner (carrusel + tarjeta)
-   4.  Nav (subnavegación, pegada arriba en celular)
-   5.  Main · estilos comunes de las secciones
-   6.  Descripción del programa
-   7.  Información clave
-   8.  Perfil del egresado
-   9.  Inversión (tarjetas que se voltean)
-   10. Documentos de interés
-   11. Contacto
-   12. Footer
-   13. Tablet      (≥ 768px)
-   14. Computador  (≥ 1024px)
-   15. Accesibilidad (menos movimiento)
-   ===================================================================== */
-
-
-/* =====================================================================
-   0. VARIABLES · los colores se cambian en un solo lugar
-   ===================================================================== */
 :root {
-    --verde: #1e7a1e;          /* verde institucional */
-    --verde-oscuro: #145214;   /* hover de botones verdes */
-    --verde-claro: #e8f3e8;    /* fondos suaves de íconos */
-    --negro: #1f1f1c;          /* header, nav, contacto */
-    --gris-fondo: #f5f5f3;     /* secciones y cajas grises */
-    --gris-linea: #3a3a37;     /* líneas sobre fondo oscuro */
+    --verde: #1e7a1e;          
+    --verde-oscuro: #145214;   
+    --verde-claro: #e8f3e8;    
+    --negro: #1f1f1c;         
+    --gris-fondo: #f5f5f3;     
+    --gris-linea: #3a3a37;    
     --blanco: #fff;
 }
 
 
-/* =====================================================================
-   1. RESET Y BASE
-   ===================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -46,10 +17,10 @@
 }
 
 html {
-    scroll-behavior: smooth;            /* bajada suave con los enlaces del nav */
+    scroll-behavior: smooth;            
 }
 
-/* El body organiza la página en 5 áreas con GRID */
+
 body {
     min-height: 100vh;
     display: grid;
@@ -63,22 +34,20 @@ body {
         "footer";
 }
 
-/* Caja centrada que se reutiliza en toda la página */
+
 .contenedor {
     max-width: 1100px;
     margin-inline: auto;
     padding-inline: 1rem;
 }
 
-/* Al bajar con un ancla, el título no queda tapado por el nav pegado */
+
 section[id] {
     scroll-margin-top: 90px;
 }
 
 
-/* =====================================================================
-   2. HEADER
-   ===================================================================== */
+
 header {
     grid-area: header;
     background: var(--negro);
@@ -108,12 +77,10 @@ header {
 }
 
 
-/* =====================================================================
-   3. BANNER · carrusel de fotos + tarjeta encima
-   ===================================================================== */
+
 .banner {
     grid-area: banner;
-    position: relative;                 /* referencia para lo que se posiciona adentro */
+    position: relative;               
     background: var(--negro);
 }
 
@@ -121,14 +88,14 @@ header {
     display: block;
     width: 100%;
     height: 320px;
-    object-fit: cover;                  /* llena el espacio sin deformar la foto */
+    object-fit: cover;                  
     object-position: center top;
 }
 
-/* En celular la tarjeta sube 80px y se monta sobre la foto */
+
 .banner-contenido {
     position: relative;
-    z-index: 2;                         /* queda ENCIMA del carrusel */
+    z-index: 2;                       
     margin-top: -80px;
     padding-bottom: 1.5rem;
 }
@@ -141,7 +108,7 @@ header {
 
 .banner-cabecera {
     display: flex;
-    justify-content: space-between;     /* Pregrado ←→ Presencial */
+    justify-content: space-between;     
     align-items: center;
 }
 
@@ -183,26 +150,24 @@ header {
 }
 
 
-/* =====================================================================
-   4. NAV · subnavegación (en celular se queda pegada arriba)
-   ===================================================================== */
+
 .subnav {
     grid-area: nav;
     background: var(--negro);
     color: var(--blanco);
     padding-block: 1rem;
-    position: sticky;                   /* se "pega"… */
-    top: 0;                             /* …en el borde de arriba */
-    z-index: 100;                       /* encima del contenido que pasa por debajo */
+    position: sticky;                 
+    top: 0;                             
+    z-index: 100;                       
 }
 
-/* Si el menú abierto no cabe en la pantalla, se desplaza por dentro */
+
 .subnav-menu {
     max-height: 70vh;
     overflow-y: auto;
 }
 
-/* Botón "Ver todo" (solo celular) */
+
 .subnav-toggle {
     width: 100%;
     display: flex;
@@ -219,7 +184,7 @@ header {
     margin-bottom: 1rem;
 }
 
-/* Cambio de texto Ver todo / Ocultar todo (sin JavaScript) */
+
 .texto-cerrar {
     display: none;
 }
@@ -240,13 +205,12 @@ header {
     transform: rotate(180deg);
 }
 
-/* Enlaces */
 .subnav-lista {
     list-style: none;
     padding: 0;
     margin: 1rem 0 0;
     display: flex;
-    flex-direction: column;             /* celular: uno debajo del otro */
+    flex-direction: column;            
     gap: 1rem;
 }
 
@@ -263,7 +227,7 @@ header {
     border-color: var(--blanco);
 }
 
-/* Botones */
+
 .subnav-acciones {
     display: flex;
     flex-direction: column;
@@ -277,7 +241,7 @@ header {
     padding: 0.8rem 1.25rem;
     font-weight: 700;
     text-decoration: none;
-    border: 2px solid var(--blanco);    /* mismo borde en los dos: miden igual */
+    border: 2px solid var(--blanco);   
     transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -302,9 +266,7 @@ header {
 }
 
 
-/* =====================================================================
-   5. MAIN · estilos comunes de todas las secciones
-   ===================================================================== */
+
 main {
     grid-area: main;
 }
@@ -324,7 +286,7 @@ main {
     color: var(--negro);
     margin: 0 0 1.5rem;
     padding-left: 0.75rem;
-    border-left: 4px solid var(--verde);  /* rayita verde a la izquierda */
+    border-left: 4px solid var(--verde);  
 }
 
 .subtitulo {
@@ -333,16 +295,13 @@ main {
     margin: 0 0 1.25rem;
 }
 
-/* Animación de aparición (se usa en "Leer el propósito completo") */
+
 @keyframes aparecer {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
 
-/* =====================================================================
-   6. DESCRIPCIÓN DEL PROGRAMA
-   ===================================================================== */
 .cita {
     margin: 0 0 2rem;
     padding: 0.5rem 0 0.5rem 1.25rem;
@@ -359,10 +318,10 @@ main {
     margin-bottom: 1rem;
 }
 
-/* Las 6 áreas con GRID */
+
 .pilares {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);  /* celular: 2 columnas */
+    grid-template-columns: repeat(2, 1fr);  
     gap: 1rem;
     list-style: none;
     padding: 0;
@@ -371,7 +330,7 @@ main {
 
 .pilar {
     display: flex;
-    flex-direction: column;             /* ícono arriba, texto abajo */
+    flex-direction: column;           
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -401,7 +360,6 @@ main {
     color: var(--blanco);
 }
 
-/* Botón "Leer el propósito completo" (píldora) */
 .leer-mas {
     display: inline-flex;
     align-items: center;
@@ -449,7 +407,7 @@ main {
 .leer-mas[aria-expanded="true"] .texto-abrir  { display: none; }
 .leer-mas[aria-expanded="true"] .texto-cerrar { display: inline; }
 
-/* Texto completo del propósito */
+
 .descripcion-texto {
     background: var(--gris-fondo);
     border-left: 4px solid var(--verde);
@@ -467,7 +425,7 @@ main {
 }
 
 .descripcion-texto p:last-child {
-    margin-bottom: 0;                   /* el último párrafo no deja hueco abajo */
+    margin-bottom: 0;                 
 }
 
 .descripcion-texto strong {
@@ -476,17 +434,14 @@ main {
 }
 
 
-/* =====================================================================
-   7. INFORMACIÓN CLAVE
-   ===================================================================== */
 .info-clave {
     border-top: 2px solid #bbbcbb;
     border-bottom: 2px solid #bbbcbb;
     margin-top: 2.5rem;
-    padding-block: 2rem;                /* solo arriba/abajo: a los lados manda .contenedor */
+    padding-block: 2rem;             
 }
 
-/* Los 4 datos con GRID */
+
 .clave {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -524,7 +479,7 @@ main {
 }
 
 .clave-item dd {
-    margin: 0 0 0 calc(34px + 0.6rem);  /* alinea el valor con el texto, no con el ícono */
+    margin: 0 0 0 calc(34px + 0.6rem);  
     font-size: 1rem;
     font-weight: 600;
     color: var(--negro);
@@ -536,15 +491,15 @@ main {
     border-bottom: 1px solid currentColor;
 }
 
-/* Los 4 cuadros con FLEX-WRAP */
+
 .legal {
     display: flex;
-    flex-wrap: wrap;                    /* los que no caben bajan a la siguiente fila */
+    flex-wrap: wrap;               
     gap: 1rem;
 }
 
 .legal-caja {
-    flex: 1 1 220px;                    /* crece | se encoge | mide ~220px */
+    flex: 1 1 220px;                  
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
@@ -583,7 +538,6 @@ main {
     color: #767676;
 }
 
-/* Botón de documento (píldora) */
 .clave-descarga {
     display: inline-flex;
     align-items: center;
@@ -603,14 +557,14 @@ main {
     color: var(--blanco);
 }
 
-/* Los botones siempre ABAJO del cuadro */
+
 .legal-caja > .clave-descarga,
 .legal-botones {
     margin-top: auto;
 }
 
 .legal-caja > .clave-descarga {
-    align-self: flex-start;             /* no se estira a todo el ancho */
+    align-self: flex-start;            
 }
 
 .legal-botones {
@@ -621,9 +575,7 @@ main {
 }
 
 
-/* =====================================================================
-   8. PERFIL DEL EGRESADO · recorrido de 3 pasos
-   ===================================================================== */
+
 .perfil-frase {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 1.35rem;
@@ -634,7 +586,7 @@ main {
 }
 
 .recorrido {
-    position: relative;                 /* referencia para la línea */
+    position: relative;                
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -643,7 +595,6 @@ main {
     margin: 0;
 }
 
-/* Celular: línea VERTICAL que pasa por el centro de los círculos */
 .recorrido::before {
     content: "";
     position: absolute;
@@ -663,7 +614,7 @@ main {
 
 .paso-numero {
     position: relative;
-    z-index: 1;                         /* queda ENCIMA de la línea */
+    z-index: 1;                       
     display: grid;
     place-items: center;
     flex-shrink: 0;
@@ -701,9 +652,6 @@ main {
 }
 
 
-/* =====================================================================
-   9. INVERSIÓN · tarjetas que se voltean (3D)
-   ===================================================================== */
 .volteo-pista {
     display: flex;
     align-items: center;
@@ -719,14 +667,14 @@ main {
     gap: 1.5rem;
 }
 
-/* El "escenario": da profundidad 3D */
+
 .volteo {
     perspective: 1000px;
     height: 290px;
-    cursor: pointer;                    /* además, en celular permite el :hover al tocar */
+    cursor: pointer;                   
 }
 
-/* La tarjeta que gira */
+
 .volteo-interno {
     position: relative;
     width: 100%;
@@ -740,11 +688,11 @@ main {
     transform: rotateY(180deg);
 }
 
-/* Las dos caras, una encima de la otra */
+
 .volteo-cara {
     position: absolute;
     inset: 0;
-    backface-visibility: hidden;        /* esconde la cara que queda de espaldas */
+    backface-visibility: hidden;       
     border-radius: 12px;
     padding: 1.75rem;
     display: flex;
@@ -752,7 +700,7 @@ main {
     justify-content: center;
 }
 
-/* Cara de adelante */
+
 .volteo-frente {
     background: var(--verde);
     color: var(--blanco);
@@ -803,7 +751,6 @@ main {
     opacity: 0.8;
 }
 
-/* Cara de atrás (empieza girada 180°) */
 .volteo-atras {
     transform: rotateY(180deg);
     background: var(--blanco);
@@ -845,13 +792,11 @@ main {
 }
 
 
-/* =====================================================================
-   10. DOCUMENTOS DE INTERÉS · barra verde con + / −
-   ===================================================================== */
+
 .docs-interes {
     border: 1px solid #dcdcdc;
     border-radius: 6px;
-    overflow: hidden;                   /* las esquinas redondas recortan la barra */
+    overflow: hidden;                
 }
 
 .docs-encabezado {
@@ -861,7 +806,7 @@ main {
 .docs-boton {
     width: 100%;
     display: flex;
-    justify-content: space-between;     /* texto a la izquierda, signo a la derecha */
+    justify-content: space-between;    
     align-items: center;
     gap: 1rem;
     padding: 0.85rem 1.25rem;
@@ -884,7 +829,6 @@ main {
     outline-offset: 2px;
 }
 
-/* El signo + / − dibujado con POSITION */
 .docs-signo {
     position: relative;
     width: 16px;
@@ -901,7 +845,7 @@ main {
     transition: transform 0.3s ease;
 }
 
-.docs-signo::before {                   /* raya horizontal (siempre se ve) */
+.docs-signo::before {                
     top: 50%;
     left: 0;
     width: 100%;
@@ -909,7 +853,7 @@ main {
     transform: translateY(-50%);
 }
 
-.docs-signo::after {                    /* raya vertical (la que desaparece) */
+.docs-signo::after {                    
     left: 50%;
     top: 0;
     width: 3px;
@@ -917,7 +861,6 @@ main {
     transform: translateX(-50%);
 }
 
-/* Abierto: la raya vertical se aplasta → queda "−" */
 .docs-boton:not(.collapsed) .docs-signo::after {
     transform: translateX(-50%) scaleY(0);
 }
@@ -930,7 +873,7 @@ main {
 }
 
 .docs-lista a {
-    display: flex;                      /* ícono | texto | flecha */
+    display: flex;                      
     align-items: center;
     gap: 0.75rem;
     padding: 0.6rem 1.25rem;
@@ -949,8 +892,8 @@ main {
     flex-shrink: 0;
 }
 
-.docs-pdf   { color: #b3261e; }         /* rojo: PDF */
-.docs-drive { color: #c08a00; }         /* amarillo: carpeta de Drive */
+.docs-pdf   { color: #b3261e; }         
+.docs-drive { color: #c08a00; }       
 
 .docs-flecha {
     margin-left: auto;
@@ -965,9 +908,6 @@ main {
 }
 
 
-/* =====================================================================
-   11. CONTACTO · banda oscura
-   ===================================================================== */
 .contacto-banda {
     background: var(--negro);
     color: var(--blanco);
@@ -986,7 +926,7 @@ main {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: #7fc47f;                     /* verde claro: se lee bien sobre negro */
+    color: #7fc47f;                   
 }
 
 .contacto-titulo {
@@ -1044,7 +984,7 @@ main {
 }
 
 .accion {
-    display: flex;                      /* ícono | texto | flecha */
+    display: flex;                  
     align-items: center;
     gap: 1rem;
     padding: 1.25rem 0.25rem;
@@ -1080,7 +1020,7 @@ main {
     flex-direction: column;
     flex: 1;
     font-size: 0.95rem;
-    overflow-wrap: anywhere;            /* el correo largo no se sale en el celular */
+    overflow-wrap: anywhere;          
 }
 
 .accion-texto small {
@@ -1101,12 +1041,10 @@ main {
 }
 
 
-/* =====================================================================
-   12. FOOTER
-   ===================================================================== */
+
 .pie {
     grid-area: footer;
-    background: #0f3d10;                /* verde muy oscuro */
+    background: #0f3d10;               
     color: #d7e6d7;
     font-size: 0.92rem;
 }
@@ -1115,15 +1053,15 @@ main {
     color: inherit;
 }
 
-/* Las 4 columnas con GRID */
+
 .pie-grid {
     display: grid;
-    grid-template-columns: 1fr;         /* celular: una debajo de otra */
+    grid-template-columns: 1fr;         
     gap: 2.5rem;
     padding-block: 3.5rem;
 }
 
-/* Columna 1: marca */
+
 .pie-logo {
     display: block;
     height: 70px;
@@ -1177,7 +1115,7 @@ main {
     color: var(--blanco);
 }
 
-/* Títulos de las columnas */
+
 .pie-titulo {
     margin: 0 0 1.25rem;
     padding-bottom: 0.6rem;
@@ -1189,18 +1127,18 @@ main {
     border-bottom: 2px solid #3f8f3f;
 }
 
-/* Columna 2: enlaces con subrayado animado */
+
 .pie-enlaces {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     gap: 0.8rem;
 }
 
 .pie-enlaces a {
-    position: relative;                 /* referencia para la línea */
+    position: relative;                 
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -1213,7 +1151,7 @@ main {
     width: 100%;
     height: 1px;
     background: var(--blanco);
-    transform: scaleX(0);               /* empieza sin ancho */
+    transform: scaleX(0);             
     transform-origin: left;
     transition: transform 0.3s ease;
 }
@@ -1223,10 +1161,10 @@ main {
 }
 
 .pie-enlaces a:hover::after {
-    transform: scaleX(1);               /* crece de izquierda a derecha */
+    transform: scaleX(1);             
 }
 
-/* Columna 3: datos con ícono */
+
 .pie-datos {
     list-style: none;
     padding: 0;
@@ -1268,7 +1206,7 @@ main {
     border-color: var(--blanco);
 }
 
-/* Columna 4: mapa */
+
 .pie-mapa {
     border-radius: 10px;
     overflow: hidden;
@@ -1283,7 +1221,7 @@ main {
     border: 0;
 }
 
-/* Franja inferior */
+
 .pie-franja {
     background: #0a2b0b;
     font-size: 0.8rem;
@@ -1291,7 +1229,7 @@ main {
 
 .pie-franja-interna {
     display: flex;
-    flex-direction: column;             /* celular: apilado y centrado */
+    flex-direction: column;            
     align-items: center;
     text-align: center;
     gap: 1rem;
@@ -1331,21 +1269,18 @@ main {
 }
 
 .pie-arriba:hover i {
-    transform: translateY(-4px);        /* la flecha "salta" hacia arriba */
+    transform: translateY(-4px);        
 }
 
 
-/* =====================================================================
-   13. TABLET (≥ 768px)
-   ===================================================================== */
 @media (min-width: 768px) {
 
-    /* Header */
+    
     .encabezado-img {
         height: 70px;
     }
 
-    /* Banner */
+    
     .banner {
         min-height: 500px;
     }
@@ -1360,7 +1295,7 @@ main {
         padding: 2rem 1.5rem;
     }
 
-    /* Nav: deja de estar pegado y el menú queda siempre abierto */
+    
     .subnav {
         position: static;
         padding-block: 1.75rem;
@@ -1380,7 +1315,7 @@ main {
     }
 
     .subnav-menu.collapse {
-        display: flex;                  /* le gana al collapse de Bootstrap */
+        display: flex;                 
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
@@ -1402,7 +1337,7 @@ main {
         margin: 0;
     }
 
-    /* Descripción */
+    
     .pilares {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -1411,7 +1346,7 @@ main {
         max-width: 75ch;
     }
 
-    /* Perfil: los 3 pasos en fila con línea horizontal */
+    
     .perfil-frase {
         font-size: 1.6rem;
     }
@@ -1422,10 +1357,10 @@ main {
     }
 
     .recorrido::before {
-        display: none;                  /* se quita la línea vertical… */
+        display: none;                
     }
 
-    .paso:not(:last-child)::after {     /* …y cada paso dibuja su tramo */
+    .paso:not(:last-child)::after {     
         content: "";
         position: absolute;
         top: 27px;
@@ -1441,24 +1376,22 @@ main {
         gap: 0.5rem;
     }
 
-    /* Inversión: tarjetas lado a lado */
+    
     .volteos {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Footer: 2 columnas */
+    
     .pie-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 
-/* =====================================================================
-   14. COMPUTADOR (≥ 1024px)
-   ===================================================================== */
+
 @media (min-width: 1024px) {
 
-    /* Header */
+
     header {
         border-bottom: none;
     }
@@ -1471,7 +1404,7 @@ main {
         height: 80px;
     }
 
-    /* Banner: el carrusel se vuelve FONDO y la tarjeta queda encima */
+    
     .banner {
         min-height: 500px;
         display: flex;
@@ -1510,7 +1443,7 @@ main {
         font-size: 2rem;
     }
 
-    /* Secciones */
+
     .seccion {
         padding-block: 4.5rem;
     }
@@ -1519,7 +1452,7 @@ main {
         font-size: 2rem;
     }
 
-    /* Descripción e información clave */
+    
     .pilares {
         grid-template-columns: repeat(6, 1fr);
     }
@@ -1528,7 +1461,6 @@ main {
         grid-template-columns: repeat(4, 1fr);
     }
 
-    /* Contacto: 2 columnas */
     .contacto-banda {
         padding-block: 5rem;
     }
@@ -1549,10 +1481,10 @@ main {
 
     .accion:hover,
     .accion:focus-visible {
-        padding-left: 0.9rem;           /* solo en computador la fila se corre */
+        padding-left: 0.9rem;         
     }
 
-    /* Footer: 4 columnas y franja en fila */
+    
     .pie-grid {
         grid-template-columns: 1.1fr 1fr 1.4fr 1.3fr;
         padding-block: 4.5rem;
@@ -1566,9 +1498,6 @@ main {
 }
 
 
-/* =====================================================================
-   15. ACCESIBILIDAD · menos movimiento para quien lo pidió en su sistema
-   ===================================================================== */
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
